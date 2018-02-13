@@ -144,7 +144,8 @@ public class TM
                {
                   Task temp =log.getTask(name);
                   temp.setDescription(args[2]);
-                  temp.size = size;
+                  if(args.length ==4)
+                     temp.size = size;
                   log.addTask(temp);
                   log.write();
                }
@@ -314,7 +315,7 @@ class Task implements java.io.Serializable//Serializable class Task that has all
    }
    public void setDescription(String s)
    {
-      description += s;
+      description += "\n\t" + s;
    }
    public String toString()
    {
