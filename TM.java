@@ -112,7 +112,7 @@ public class TM
                   String name = args[1];
                   if(!log.contains(name))
                   {
-                     System.out.println("There is no such task");
+                     System.out.println("THERE IS NO SUCH TASK");
                   }
                   else
                   {
