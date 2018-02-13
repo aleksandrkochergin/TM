@@ -133,7 +133,12 @@ public class TM
             {
                String size = "";
                if(args.length ==4)
-                  size = args[3];
+               {
+                  if(args[3].equals("XS") || args[3].equals("S") || args[3].equals("M") || args[3].equals("L") || args[3].equals("XL"))
+                     size = args[3];
+                  else
+                     System.out.println("Use correct sizing (XS,S,M,L,XL)");
+               }
                String name = args[1];
                if(log.contains(name))
                {
