@@ -64,6 +64,7 @@ public class TM
                   {
                         Task t = log.getTask(args[1]);
                         t.size = args[2];
+                        log.addTask(t);
                         log.write();
                   }
                   else
@@ -121,24 +122,32 @@ public class TM
             }
             break;
          case "describe":
-            if(args.length<3 || args.length>3)
+            if(args.length != 3 && args.length != 4)
             {
-               System.out.println("Please enter <describe> followed by name and description inside quotation marks");
+               System.out.println("Use describe command as follows:"
+               +"\ndescribe <task name> <task description>"
+               +"\nOR:"
+               +"\ndescribe <task name> <task desciption> <XS,S,M,L,XL>");
             }
             else
             {
+               String size = "";
+               if(args.length ==4)
+                  size = args[3];
                String name = args[1];
                if(log.contains(name))
                {
                   Task temp =log.getTask(name);
                   temp.setDescription(args[2]);
+                  temp.size = size;
                   log.addTask(temp);
                   log.write();
                }
                else
                {
                   Task temp = new Task(args[1], false);
-                  temp.setDescription(args[2]);
+                  temp.setDescription("\n" + args[2]);
+                  temp.size = size;
                   log.addTask(temp);
                   log.write();
                }
@@ -300,7 +309,7 @@ class Task implements java.io.Serializable//Serializable class Task that has all
    }
    public void setDescription(String s)
    {
-      description = s;
+      description += s;
    }
    public String toString()
    {
