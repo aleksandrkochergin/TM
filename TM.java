@@ -49,6 +49,13 @@ public class TM
             }
             break;
          case "size":
+            if(args.length != 3)
+            {
+               System.out.println("Enter the arguments in the correct format"
+               +"\nsize <task name> <task size> "
+               + "\n Both task name and task size have to be contained inside parrentesis");
+               
+            }
             
             break;
          case "stop":
