@@ -11,6 +11,7 @@ public class TM
    {
            
       LOG log = new LOG();//Creates a new log file
+      TMModel tmModel = new TMModel();
       try
       {
          log.read();//sync up the log file with previous entries
@@ -24,28 +25,16 @@ public class TM
       }
       switch(command)//Checks the arguments passed through the command line
       {
+        
          case "start":
             if(args.length<2 || args.length>2)
             {
-               System.out.println("Enter the command and the name of the task as parameters");
+               usage();
             }
             else
             {
-               String name = args[1];
-               if(log.contains(name))
-               {
-                  start(name, log);
-               }
-               else
-               {
-                  LocalDateTime time;
-                  time = LocalDateTime.now();
-                  Task temp = new Task(args[1], true);
-                  temp.addTime(time);
-                  log.addTask(temp);
-                  log.write();
-               }
-               
+               if(!tmModel.startTask(args[1]))
+                  usage();
             }
             break;
          case "size":
@@ -160,7 +149,7 @@ public class TM
             }
             break;
          default:
-            System.out.println("Enter a command followed by data\n\n<start>           \"name of task\"     <--starts a task\n<stop>            \"name of tast\"     <--stops a task\n<describe> \"name\" \"description\"      <--describes a task\n<summary>         \"task name\"        <--summarizes a given task\n<summary>                            <--summarizes all tasks");
+            usage();
       } 
    }
    public static void main(String[] args)throws ClassNotFoundException, IOException//Main method, has a call to appMain, a non static main method
@@ -169,6 +158,14 @@ public class TM
       tm.appMain(args);
       
       
+   }
+   public void usage()
+   {
+      System.out.println("Enter a command followed by data\n\n<start>"
+      +"           \"name of task\"     <--starts a task\n<stop>           "
+      +" \"name of tast\"     <--stops a task\n<describe> \"name\" \"description\""
+      +"    <--describes a task\n<summary>         \"task name\"        <--summarizes a given task\n<summary>  "        
+      +"                  <--summarizes all tasks");
    }
    public void stop(String name, LOG log)throws ClassNotFoundException, FileNotFoundException, IOException//Records the time a certain task was stopped
    {
@@ -191,22 +188,4 @@ public class TM
    {
       System.out.println(log);
    }
-   public void start(String name, LOG log) throws ClassNotFoundException, FileNotFoundException, IOException //Starts tasks that are already found in the log
-   {
-      LocalDateTime time;
-      time = LocalDateTime.now();
-      Task temp = log.getTask(name);
-      if(temp.getStatus()==false)
-      {
-         temp.addTime(time);
-         temp.changeStatus(true);
-         log.addTask(temp);
-         log.write();
-      }
-      else
-      {
-         System.out.println("The task has already been started");
-      }
-
-   }
-}
+  }
