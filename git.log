@@ -1,0 +1,43 @@
+commit e6513b070daf2b242c055e2d7e5c84c9cfe6b3c1
+Author: Alex Kochergin <aleksandrkochergin1997@gmail.com>
+Date:   Mon Feb 12 20:56:56 2018 -0800
+
+    Made final changes and tested the program
+
+
+commit f7a25e77b137b5376936da79e131a779929f14e2
+Author: Alex Kochergin <aleksandrkochergin1997@gmail.com>
+Date:   Mon Feb 12 20:53:22 2018 -0800
+
+    Added data validation for size
+
+
+commit 4bbf707f12f7c23752a15b6cc499258df8f6b4bb
+Author: Alex Kochergin <aleksandrkochergin1997@gmail.com>
+Date:   Mon Feb 12 20:50:14 2018 -0800
+
+    Completed the Describe command
+    user is now able to add on new
+    lines of descripttion, as well
+    as adding size while descibing
+
+
+commit 4a3260843a3a9fb38fd6db0f888d94c776c08489
+Author: Alex Kochergin <aleksandrkochergin1997@gmail.com>
+Date:   Mon Feb 12 20:47:50 2018 -0800
+
+    Finished the size command
+
+
+commit ed85638f9da1fa6d737300aa2758b568a8ac1dc7
+Author: Alex Kochergin <aleksandrkochergin1997@gmail.com>
+Date:   Mon Feb 12 20:43:01 2018 -0800
+
+    Added instructions on how to use the size command
+
+
+commit 042ccc25cca2e2cab18fb97eea341a48532e81e1
+Author: Alex Kochergin <aleksandrkochergin1997@gmail.com>
+Date:   Mon Feb 12 20:40:25 2018 -0800
+
+    Initial Commit
