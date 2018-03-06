@@ -106,11 +106,32 @@ public class TMModel implements ITMModel
             log.write();
          }catch(Exception e){}
       }
-      return false;
+      return true;
     }
     public boolean sizeTask(String name, String size)
     {
-      return false;
+      if(log.contains(name))
+      {
+         if(size.equals("S") || size.equals("M") || size.equals("L") || size.equals("XL"))
+         {
+            Task t = log.getTask(name);
+            t.size = size;
+            log.addTask(t);
+            try
+            {
+               log.write();
+            
+            }catch(Exception e){}
+         }
+         else
+            System.out.println("Please use the correct sizing (S,M,L,XL)");
+      }
+      else
+      {
+         return false;
+      }
+      
+      return true;
     }
     public boolean deleteTask(String name)
     {

@@ -41,29 +41,14 @@ public class TM
             if(args.length != 3)
             {
                System.out.println("Enter the arguments in the correct format"
-               +"\nsize <task name> <XS,S,M,L,XL> "
+               +"\nsize <task name> <S,M,L,XL> "
                + "\n Both task name and task size have to be contained inside parrentesis");
                
             }
             else
             {
-               if(log.contains(args[1]))
-               {
-                  if(args[2].equals("XS") || args[2].equals("S") || args[2].equals("M") || args[2].equals("L") || args[2].equals("XL"))
-                  {
-                        Task t = log.getTask(args[1]);
-                        t.size = args[2];
-                        log.addTask(t);
-                        log.write();
-                  }
-                  else
-                     System.out.println("Please use the correct sizing (XS,S,M,L,XL)");
-              }
-              else
-              {
-                  System.out.println("Can't size a task that hasn't been initialized or descibed");
-              }
-               
+               if(!tmModel.sizeTask(args[1],args[2]))
+                  System.out.println("Task does not exist");               
             }
             break;
          case "stop":
@@ -115,15 +100,17 @@ public class TM
             else
             {
                String size = "";
-               if(args.length ==4)
-               {
-                  if(args[3].equals("XS") || args[3].equals("S") || args[3].equals("M") || args[3].equals("L") || args[3].equals("XL"))
-                     size = args[3];
-                  else
-                     System.out.println("Use correct sizing (XS,S,M,L,XL)");
-               }
                String name = args[1];
                tmModel.describeTask(name,args[3]);
+               if(args.length ==4)
+               {
+                  size = args[3];
+                  if(!tmModel.sizeTask(name, size))
+                  {
+                     System.out.println("Task doesn't exist");
+                  }
+               }
+
             }
             break;
          default:

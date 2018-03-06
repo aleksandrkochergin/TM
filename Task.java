@@ -38,13 +38,6 @@ public class Task implements java.io.Serializable//Serializable class Task that 
       else
          s+= "\nStatus: not in progress";   
       s+= "\nTime stamps:\n";
-      for(int i= 0; i<times.size(); i++)
-      {
-         if(i%2==0)
-            s+= "Started: "+times.get(i)+ "  ";
-         else
-            s+= "Stopped: " +times.get(i) + "  ";
-      }
       s+= "\nTotal time spent: " + totalTime();
       return s;
    }
