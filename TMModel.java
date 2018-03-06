@@ -91,7 +91,7 @@ public class TMModel implements ITMModel
       if(log.contains(name))
       {
          Task temp =log.getTask(name);
-         temp.setDescription("\n" + description);
+         temp.setDescription(description);
          log.addTask(temp);
          try{
          log.write();
@@ -135,7 +135,14 @@ public class TMModel implements ITMModel
     }
     public boolean deleteTask(String name)
     {
-      return false; 
+      if(!log.contains(name))
+         return false;
+      log.delete(name);
+      try
+      {
+         log.write();
+      }catch(Exception e){}
+      return true; 
     }
     public boolean renameTask(String oldName, String newName)
     {

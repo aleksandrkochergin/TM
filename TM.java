@@ -89,6 +89,16 @@ public class TM
                }
             }
             break;
+         case "delete":
+            if(args.length != 2)
+            {
+               usage();
+            }
+            else
+            {
+               if(!tmModel.deleteTask(args[1]))
+                  System.out.println("No task with such name found");
+            }
          case "describe":
             if(args.length != 3 && args.length != 4)
             {
@@ -101,7 +111,7 @@ public class TM
             {
                String size = "";
                String name = args[1];
-               tmModel.describeTask(name,args[3]);
+               tmModel.describeTask(name,args[2]);
                if(args.length ==4)
                {
                   size = args[3];
