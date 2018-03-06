@@ -58,10 +58,54 @@ public class TMModel implements ITMModel
     }
     public boolean stopTask(String name)
     {
-      return false;
+      if(!log.contains(name))
+      {
+         return false;
+      }
+      else
+      {
+         LocalDateTime time;
+         time = LocalDateTime.now();
+         Task temp = log.getTask(name);
+         if(temp.getStatus()==true)
+         {
+            temp.addTime(time);
+            temp.changeStatus(false);
+            log.addTask(temp);
+            try
+            {
+            log.write();
+            }catch(Exception e){}
+         }
+         else
+         {
+            return false;
+         }
+
+      }
+
+      return true;
     }
     public boolean describeTask(String name, String description)
     {
+      if(log.contains(name))
+      {
+         Task temp =log.getTask(name);
+         temp.setDescription("\n" + description);
+         log.addTask(temp);
+         try{
+         log.write();
+         }catch(Exception e){}
+      }
+      else
+      {
+         Task temp = new Task(name, false);
+         temp.setDescription("\n" + description);
+         log.addTask(temp);
+         try{
+            log.write();
+         }catch(Exception e){}
+      }
       return false;
     }
     public boolean sizeTask(String name, String size)

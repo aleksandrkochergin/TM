@@ -69,19 +69,13 @@ public class TM
          case "stop":
             if(args.length<2 || args.length>2)
             {
-               System.out.println("Enter the command and the name of the task as parameters");
+               usage();   
             }
             else
             {
                String name = args[1];
-               if(!log.contains(name))
-               {
-                  System.out.println("UNABLE TO STOP A TASK THAT DOESN'T EXIST");
-               }
-               else
-               {
-                  stop(name,log);
-               }
+               if(!tmModel.stopTask(name))
+                  usage();
             }
             
             break;
@@ -129,23 +123,7 @@ public class TM
                      System.out.println("Use correct sizing (XS,S,M,L,XL)");
                }
                String name = args[1];
-               if(log.contains(name))
-               {
-                  Task temp =log.getTask(name);
-                  temp.setDescription(args[2]);
-                  if(args.length ==4)
-                     temp.size = size;
-                  log.addTask(temp);
-                  log.write();
-               }
-               else
-               {
-                  Task temp = new Task(args[1], false);
-                  temp.setDescription("\n" + args[2]);
-                  temp.size = size;
-                  log.addTask(temp);
-                  log.write();
-               }
+               tmModel.describeTask(name,args[3]);
             }
             break;
          default:
@@ -167,23 +145,7 @@ public class TM
       +"    <--describes a task\n<summary>         \"task name\"        <--summarizes a given task\n<summary>  "        
       +"                  <--summarizes all tasks");
    }
-   public void stop(String name, LOG log)throws ClassNotFoundException, FileNotFoundException, IOException//Records the time a certain task was stopped
-   {
-      LocalDateTime time;
-      time = LocalDateTime.now();
-      Task temp = log.getTask(name);
-      if(temp.getStatus()==true)
-      {
-         temp.addTime(time);
-         temp.changeStatus(false);
-         log.addTask(temp);
-         log.write();
-      }
-      else
-      {
-         System.out.println("The task has already been stopped");
-      }
-   }
+   
    public void summary(LOG log)throws ClassNotFoundException, FileNotFoundException, IOException//Prints out summary of all the tasks
    {
       System.out.println(log);
