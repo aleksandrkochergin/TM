@@ -138,15 +138,20 @@ public class TMModel implements ITMModel
       if(!log.contains(name))
          return false;
       log.delete(name);
+         return true; 
+    }
+    public boolean renameTask(String oldName, String newName)
+    {
+      if(!log.contains(oldName))
+         return false;
+      Task temp = log.getTask(oldName);
+      temp.name = newName;
+      log.addTask(temp);
       try
       {
          log.write();
       }catch(Exception e){}
-      return true; 
-    }
-    public boolean renameTask(String oldName, String newName)
-    {
-      return false;
+      return true;
     }
 
     // return information about our tasks

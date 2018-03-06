@@ -89,6 +89,13 @@ public class TM
                }
             }
             break;
+         case "rename":
+            if(args.length != 3)
+               usage();
+            else
+               if(!tmModel.renameTask(args[1],args[2]))
+                  System.out.println("Task does not exist");
+                  break;
          case "delete":
             if(args.length != 2)
             {
@@ -99,6 +106,7 @@ public class TM
                if(!tmModel.deleteTask(args[1]))
                   System.out.println("No task with such name found");
             }
+            break;
          case "describe":
             if(args.length != 3 && args.length != 4)
             {

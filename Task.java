@@ -1,9 +1,11 @@
 import java.time.LocalDateTime;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.io.*;
 public class Task implements java.io.Serializable//Serializable class Task that has all the features of a task and keeps track of all the time stamps
 {
-   private String name;
+   public String name;
    private boolean status;
    private ArrayList<LocalDateTime> times;
    private String description;
@@ -53,38 +55,16 @@ public class Task implements java.io.Serializable//Serializable class Task that 
       else
       {
          
+         long elapsedSeconds= 0;
          for(int i = 0; i<times.size(); i=i+2)
          {
-            
-            int h1 = Integer.parseInt(times.get(i).toString().substring(11,13));
-            int m1 = Integer.parseInt(times.get(i).toString().substring(14,16));
-            int s1 = Integer.parseInt(times.get(i).toString().substring(17,19));
-            
-            int h2 = Integer.parseInt(times.get(i+1).toString().substring(11,13));
-            int m2 = Integer.parseInt(times.get(i+1).toString().substring(14,16));
-            int s2 = Integer.parseInt(times.get(i+1).toString().substring(17,19));
-            
-            if(s2<s1)
-            {
-               m2--;
-               s2+=60;
-            }
-            s2-=s1;
-            if(m2<m1)
-            {
-               h2--;
-               m2+=60;
-            }
-            m2-=m1;
-            if(h2<h1)
-            {
-               h2+=24;
-            }   
-            h2-=h1;
-            totalh+=h2;
-            totalm+=m2;
-            totals+=s2;
+            elapsedSeconds +=  ChronoUnit.SECONDS.between(times.get(i),times.get(i+1));
          }
+         totalh = (int) elapsedSeconds / 3600;
+         int remainder = (int) elapsedSeconds  - totalh * 3600;
+         totalm = remainder / 60;
+         remainder = remainder - totalm * 60;
+         totals = remainder;
       }
       s = Integer.toString(totalh) + " : " + Integer.toString(totalm) + " : " + Integer.toString(totals);
       return s;
