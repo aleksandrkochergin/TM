@@ -7,6 +7,10 @@ public class LOG implements java.io.Serializable //Serializable log class that k
    public LOG()
    {
       tasks = new ArrayList<Task>();
+      try
+      {
+      read();
+      }catch(Exception e){}
    }
    public boolean contains(String name)
    {
@@ -25,9 +29,98 @@ public class LOG implements java.io.Serializable //Serializable log class that k
       for(int i=0; i<tasks.size(); i++)
       {
          s= s+ tasks.get(i).toString();
-         s+= "  \n===============================";
+         s+= "  \n=====================================";
       }
       
+      return s;
+   }
+   public String minTime(String size)
+   {
+      
+      long min = 0;
+      for(int i=0; i<1;i++)
+      {
+         
+         
+         if(tasks.get(i).getSize().equals(size))
+         {
+            min = tasks.get(i).time();
+         }
+      }
+      
+      for(int j=0; j<2;j++)
+      {
+         if(tasks.get(j).getSize().equals(size) && tasks.get(j).time()<min)
+         {
+            min = tasks.get(j).time();
+         }
+      }
+      
+      return convert(min);
+   }
+   public String maxTime(String size)
+   {
+      long max = 0;
+      for(int i=0; i<tasks.size();i++)
+      {
+         if(tasks.get(i).getSize().equals(size))
+         {
+            max = tasks.get(i).time();
+         }
+      }
+      for(int i=0; i<tasks.size();i++)
+      {
+         if(tasks.get(i).getSize().equals(size) && tasks.get(i).time()>max)
+         {
+            max = tasks.get(i).time();
+         }
+      }
+      return convert(max);
+   }
+   public int howManySize(String s)
+   {
+      int count = 0;
+      for(int i=0; i<tasks.size();i++)
+      {
+         if(tasks.get(i).getSize().equals(s))
+            count++;
+      }
+      return count;
+   }
+   public String averageTime(String size)
+   {
+      long average = 0;
+      int count = 0;
+      for(int i=0; i<tasks.size();i++)
+      {
+         if(tasks.get(i).getSize().equals(size))
+         {
+            average += tasks.get(i).time();
+            count++;
+         }
+      }
+      average = average/count;
+      return convert(average);
+   }
+   public String timeForAllTasks()
+   {
+      long total = 0;
+      for(int i=0; i<tasks.size();i++)
+      {
+         total+=tasks.get(i).time();
+      }
+      return convert(total);
+   }
+
+   public String convert(long elapsedSeconds)
+   {
+      int totalh=0, totalm=0,totals=0;
+      totalh = (int) elapsedSeconds / 3600;
+      int remainder = (int) elapsedSeconds  - totalh * 3600;
+      totalm = remainder / 60;
+      remainder = remainder - totalm * 60;
+      totals = remainder;
+      String s = Integer.toString(totalh) + " : " + Integer.toString(totalm) + " : " + Integer.toString(totals);
       return s;
    }
    public void delete(String name)

@@ -40,7 +40,28 @@ public class Task implements java.io.Serializable//Serializable class Task that 
       else
          s+= "\nStatus: not in progress";   
       s+= "\nTotal time spent: " + totalTime();
+      
+      LOG log = new LOG();
+      if(log.howManySize(size) >= 2)
+      {
+         s+=("\n-----------");
+         s+=("\nStats:");
+         s+=("\nMin time for size " + size + ":     " + log.minTime(size));
+         s+=("\nMax time for size " + size + ":     " + log.maxTime(size));
+         s+=("\nAverage time for size " + size + ": " + log.averageTime(size));
+      }
+      
       return s;
+   }
+   public long time()
+   {
+      long elapsedSeconds = 0;
+      for(int i=0; i<times.size(); i=i+2)
+      {
+         elapsedSeconds += ChronoUnit.SECONDS.between(times.get(i),times.get(i+1));
+
+      }
+      return elapsedSeconds;
    }
    public String totalTime()//Calculates the total time spent on a certain task and converts it to a regular format
    {
@@ -77,6 +98,10 @@ public class Task implements java.io.Serializable//Serializable class Task that 
    {
       return times;
    }  
+   public String getSize()
+   {
+      return size;
+   }
    public void setName(String n)
    {
       name = n;
@@ -88,6 +113,10 @@ public class Task implements java.io.Serializable//Serializable class Task that 
    public String getName()
    {
       return name;
+   }
+   public String getDescription()
+   {
+      return description;
    }
    public boolean getStatus()
    {

@@ -159,16 +159,19 @@ public class TMModel implements ITMModel
     public String taskElapsedTime(String name)
     {
       String ret = "";
+      ret = log.peek(name).totalTime();
       return ret;
     }
     public String taskSize(String name)
     {
       String ret = "";
+      log.peek(name).getSize();
       return ret;
     }
     public String taskDescription(String name)
     {
       String ret = "";
+      log.peek(name).getDescription();
       return ret;
     }
 
@@ -176,23 +179,32 @@ public class TMModel implements ITMModel
     //
     public String minTimeForSize(String size)
     {
-      String ret = "";
+      String ret = log.minTime(size);
       return ret;
     }
     public String maxTimeForSize(String size)
     {
-      String ret = "";
+      String ret = log.maxTime(size);
       return ret;
     }
     public String avgTimeForSize(String size)
     {
-      String ret = "";
+      String ret = log.averageTime(size);
       return ret;
     }
 
     public Set<String> taskNamesForSize(String size)
     {
-      return null;
+      Set<String> set = new HashSet<String>();
+      ArrayList<Task> list = log.getList();
+      for(int i=0; i<list.size(); i++)
+      {
+         if(list.get(i).getSize().equals(size))
+         {
+            set.add(list.get(i).getName());
+         }
+      }
+      return set;
     }
 
     // return information about all tasks
@@ -200,15 +212,28 @@ public class TMModel implements ITMModel
     public String elapsedTimeForAllTasks()
     {
       String ret = "";
+      ret = log.timeForAllTasks();
       return ret;
     }
     public Set<String> taskNames()
     {
-      return null;
+      Set<String> set = new HashSet<String>();
+      ArrayList<Task> list = log.getList();
+      for(int i=0; i<list.size(); i++)
+      {
+         set.add(list.get(i).getName());
+      }
+      return set;
     }
     public Set<String> taskSizes()
     {
-      return null;
+      Set<String> set = new HashSet<String>();
+      ArrayList<Task> list = log.getList();
+      for(int i=0; i<list.size(); i++)
+      {
+         set.add(list.get(i).getSize());
+      }
+      return set;
     }
 
 }
