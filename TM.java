@@ -145,10 +145,16 @@ public class TM
    public void usage()
    {
       System.out.println("Enter a command followed by data\n\n<start>"
-      +"           \"name of task\"     <--starts a task\n<stop>           "
-      +" \"name of tast\"     <--stops a task\n<describe> \"name\" \"description\""
-      +"    <--describes a task\n<summary>         \"task name\"        <--summarizes a given task\n<summary>  "        
-      +"                  <--summarizes all tasks");
+      +" <name of task>                  <--starts a task\n<stop> "
+      +" <name of task>                  <--stops a task\n<describe> <name> <description>"
+      +"         <--describes a task"
+      +"\n<describe> <name> <description> <size>  <--describes a task and sizes it"
+      +"\n<size> <name> <size>                    <--sizes a task"
+      +"\n<rename> <name> <new name>              <--renames a task"
+      +"\n<delete> <name>                         <--deletes the task"
+      +"\n<summary> <task name>                   <--summarizes a given task\n<summary>  "        
+      +"                             <--summarizes all tasks and provides statistics"
+      +"\nVALID SIZES: S|M|L|XL");
    }
    
    public void summary(LOG log)throws ClassNotFoundException, FileNotFoundException, IOException//Prints out summary of all the tasks
