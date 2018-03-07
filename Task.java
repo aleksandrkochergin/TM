@@ -42,7 +42,7 @@ public class Task implements java.io.Serializable//Serializable class Task that 
       s+= "\nTotal time spent: " + totalTime();
       
       LOG log = new LOG();
-      if(log.howManySize(size) >= 2)
+      if(log.howManySize(size) >= 2 && log.statusOfSize(size) == false)
       {
          s+=("\n-----------");
          s+=("\nStats:");

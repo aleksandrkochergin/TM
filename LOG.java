@@ -23,6 +23,15 @@ public class LOG implements java.io.Serializable //Serializable log class that k
       }
       return false;
    }
+   public boolean statusOfSize(String size)
+   {
+      for(int i=0; i< tasks.size();i++)
+      {
+         if(tasks.get(i).getStatus() == true)
+            return true;   
+      }
+      return false;
+   }
    public String toString()
    {
       String s = "";
@@ -125,7 +134,6 @@ public class LOG implements java.io.Serializable //Serializable log class that k
    }
    public void delete(String name)
    {
-      System.out.println("test");
       tasks.remove(getTask(name));
       try
       {write();
